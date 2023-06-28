@@ -7,14 +7,13 @@ import { nanoid } from 'nanoid';
 import Table from './Table'
 
 function Form() {
-    const [inputData, setInputData] = useState({
-        name: "",
-        email: "",
-        birthdate: "",
-        gender: "",
-        education: "",
-        password: ""
-    })
+    const initialValue = { name: "",
+    email: "",
+    birthdate: "",
+    gender: "",
+    education: "",
+    password: ""}
+    const [inputData, setInputData] = useState(initialValue)
     const { name, email, birthdate, gender, education, password } = inputData
     const [details, setDetails] = useState(mockData);
 
