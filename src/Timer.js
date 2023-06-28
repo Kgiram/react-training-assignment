@@ -1,42 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Timer = (props) => {
-	const state = {
-		timerValue: 0
-	}
-	const [data, setData] = useState(state);
-	const [_props, setProps] = useState(props);
-	const timer = useRef();
+const Timer = () => {
+	const [value, setValue] = useState(0);
+	const [isRunning, setIsRunning] = useState(false);
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
-		const newState = {
-			timerStarted: !props.timerStarted
-		};
-		setProps({ ...newState });
-		if (newState.timerStarted) {
-			timer.current = setInterval(() => {
-				setData((data) => data + 1);
+		let intervalId;
+
+		if (isRunning) {
+			intervalId = setInterval(() => {
+				setValue((prevCounter) => prevCounter + 1);
 			}, 1000);
-		} else {
-			clearInterval(timer);
-			timer.current = null;
-			setData(0);
 		}
-		setProps(props);
-	}, [props])
 
-	useEffect(() => {
-		clearInterval(timer);
-		timer.current = null;
 		return () => {
-			console.log('Timer unmounted')
-		}
-	}, [])
+			clearInterval(intervalId);
+		};
+	}, [isRunning]);
+
+	const handleToggle = () => {
+		setIsRunning((prevIsRunning) => !prevIsRunning);
+		setValue(0);
+		setShow(!show)
+	};
 
 	return (
-		props.timerStarted && <div>Value: {data}</div>
-	)
-
-}
+		<div>
+			<button onClick={handleToggle}>{isRunning ? "STOP" : "START"}</button>
+			{show && <div style={{ marginTop: "20px" }}> Value:: {value}</div>}
+		</div>
+	);
+};
 
 export default Timer;

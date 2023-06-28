@@ -7,48 +7,26 @@ export default function FunctionalComponent() {
     timerMounted: false,
     timerStarted: false,
   };
-
-  const [states,setStates] = useState(initialTimer);
+  const [states, setStates] = useState(initialTimer);
+  const [timerMounted, setTimerMounted] = useState(false)
 
   useEffect(() => {
     console.log("Application mounted");
   }, [])
 
- const changeTimerStatus = () => {
-   setStates({  timerMounted: states.timerMounted,timerStarted: !states.timerStarted }, () => {
-      if (states.timerStarted) alert("Timer started");
-    });
-  }
-
   const addTimer = () => {
-    const newState = {
-      timerMounted: !states.timerMounted,
-      timerStarted: states.timerMounted ? false : states.timerStarted,
-    };
-    setStates({ ...newState });
+    setTimerMounted(!timerMounted)
   }
 
-    return (
-      <div className="App">
-        <h1>Timer</h1>
-        <button onClick={addTimer}>
-          {console.log(states)}
-          {states.timerMounted ? "REMOVE TIMER" : "ADD Timer"}
-        </button>
-        <br />
-        <br />
-        {states.timerMounted && (
-          <>
-            <button onClick={changeTimerStatus}>
-              {states.timerStarted ? "STOP" : "START"}
-            </button>
-            <br />
-            <br />
-            <Timer timerStarted={states.timerStarted} />
-          </>
-        )}
-      </div>
-    );
-  }
-
-
+  return (
+    <div className="App">
+      <h1>Timer</h1>
+      <button onClick={addTimer}>
+        {timerMounted ? "REMOVE TIMER" : "ADD Timer"}
+      </button>
+      <br />
+      <br />
+      {timerMounted && <Timer />}
+    </div>
+  );
+}
