@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const EditRow = ({ editInputData, handleEditFormData , handleCancelClick}) => {
   const [startDate] = useState(new Date());
+  const { name, email, birthdate, gender, education } = editInputData
 
   return (
     <tr>
@@ -13,7 +14,7 @@ const EditRow = ({ editInputData, handleEditFormData , handleCancelClick}) => {
           required='required'
           placeholder='Enter a name...'
           name='name'
-          value={editInputData.name}
+          value={name}
           onChange={handleEditFormData}>
         </input>
       </td>
@@ -23,26 +24,24 @@ const EditRow = ({ editInputData, handleEditFormData , handleCancelClick}) => {
           required='required'
           placeholder='Enter a email...'
           name='email'
-          value={editInputData.email}
+          value={email}
           onChange={handleEditFormData}>
         </input>
       </td>
       <td>
         <DatePicker selected={startDate} name='birthdate'
-          value={editInputData.birthdate}
+          value={birthdate}
           onChange={handleEditFormData} />
-        {/* <CustomDate  value={editInputData.birthdate}
-            onChange={handleEditFormData}/> */}
       </td>
       <td>
-        <div onChange={handleEditFormData}  value={editInputData.gender} >
+        <div onChange={handleEditFormData}  value={gender} >
           <input type="radio" value="Male" name="gender" /> Male
           <input type="radio" value="Female" name="gender" /> Female
           <input type="radio" value="Other" name="gender" /> Other
         </div>
       </td>
       <td>
-        <div onChange={handleEditFormData}  value={editInputData.education}>
+        <div onChange={handleEditFormData}  value={education}>
           <select name="education" >
             <option value="ssc">SSC</option>
             <option value="hsc">HSC</option>

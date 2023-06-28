@@ -8,9 +8,8 @@ const root = ReactDOM.createRoot(el);
 
 function App(){
     return (
-        <Form />
-        
+        <Form />   
     );
 }
 
-root.render(<App />);
+root.render(<App/>);

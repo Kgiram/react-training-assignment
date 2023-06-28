@@ -10,9 +10,7 @@ function CustomDate() {
         <DatePicker selected={startDate} 
         name='birthdate'
         onChange={(Date) => setStartDate(Date)} />
-       </label>
-      
-     
+       </label>   
     );  
 }
 
